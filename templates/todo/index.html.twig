@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+<div class = "container"> 
+<h1>ToDo List </h1>
+    <form action ="{{path('create_task')}}" method ="POST">
+    <input type="text" name="title" id="taskTitle" placeholder ="Add task...."/>
+    <button type="submit" class="add-btn">Add</button>
+    </form>
+
+    <div class="lines">
+    <ul>
+   {%for task in tasks%}
+    <li  class="task-list-item" >
+        <a href="{{path('update_task', {'id':task.id})}}">
+        <span {% if task.status %} class="checked"{% endif %} >{{task.title}}</span> </a>
+        <a onclick="return confirm('Are you sure to delete?')" href="{{path('delete_task', {'id': task.id})}}"><span class="delete">X</span></a>
+    </li>
+    {% endfor %}
+    </ul>
+    </div>
+   
+</div>
+
+</body>
+
+{% endblock %}
